@@ -1,4 +1,4 @@
-MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:20:49         PAGE  1
+MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:57:09         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -55,35 +55,37 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 000D   0BA0           00048 LOOP1   DECFSZ COUNTER, 1;substract 1 from 255
 000E   2???           00049         GOTO    LOOP1     ;if counter is zero then carry on
                       00050         
-000F   3004           00051         MOVLW b'00000100' ;load the W with 0x03 
-0010   0087           00052         MOVWF PORTC    ;Turn ON second LED on PORTC
-MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:20:49         PAGE  2
+000F   0187           00051         CLRF PORTC  ;to turn OFF all LEDs that may be ON 
+0010   3004           00052         MOVLW b'00000100' ;load the W with 0x03 
+MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:57:09         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00053         ;delay
-0011   30FF           00054         MOVLW  0xff ;  or b'11111111'
-0012   00A0           00055         MOVWF COUNTER    ;set counter to 0xff   
-                      00056 
-0013   0BA0           00057 LOOP2   DECFSZ COUNTER, 1 ;substract 1 from 255
-0014   2???           00058         GOTO    LOOP2     ;if counter is zero then carry on
-                      00059         
-0015   3008           00060         MOVLW b'00001000'  ; load the W with 0x04 
-0016   0087           00061         MOVWF PORTC    ;Turn ON third LED on PORTC
-                      00062         ;delay
-0017   30FF           00063         MOVLW    0xff ; or b'11111111' 
-0018   00A0           00064         MOVWF COUNTER    ;set counter to 0xff   
-                      00065         
-                      00066 
-0019   0BA0           00067 LOOP3   DECFSZ COUNTER, 1 ;substract 1 from 255
-001A   2???           00068         GOTO    LOOP3     ;if counter is zero then carry on
-                      00069         
-001B   2???           00070         GOTO START
+0011   0087           00053         MOVWF PORTC    ;Turn ON second LED on PORTC
+                      00054         ;delay
+0012   30FF           00055         MOVLW  0xff ;  or b'11111111'
+0013   00A0           00056         MOVWF COUNTER    ;set counter to 0xff   
+                      00057 
+0014   0BA0           00058 LOOP2   DECFSZ COUNTER, 1 ;substract 1 from 255
+0015   2???           00059         GOTO    LOOP2     ;if counter is zero then carry on
+                      00060         
+0016   0187           00061         CLRF PORTC  ; to turn OFF all LEDs that may be ON 
+0017   3008           00062         MOVLW b'00001000'  ; load the W with 0x04 
+0018   0087           00063         MOVWF PORTC    ;Turn ON third LED on PORTC
+                      00064         ;delay
+0019   30FF           00065         MOVLW    0xff ; or b'11111111' 
+001A   00A0           00066         MOVWF COUNTER    ;set counter to 0xff   
+                      00067         
+                      00068 
+001B   0BA0           00069 LOOP3   DECFSZ COUNTER, 1 ;substract 1 from 255
+001C   2???           00070         GOTO    LOOP3     ;if counter is zero then carry on
                       00071         
-                      00072         END
-MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:20:49         PAGE  3
+001D   2???           00072         GOTO START
+                      00073         
+                      00074         END
+MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:57:09         PAGE  3
 
 
 SYMBOL TABLE
@@ -91,8 +93,8 @@ SYMBOL TABLE
 
 COUNTER                           00000020
 LOOP1                             0000000D
-LOOP2                             00000013
-LOOP3                             00000019
+LOOP2                             00000014
+LOOP3                             0000001B
 PORTC                             00000007
 RP0                               00000005
 RP1                               00000006

@@ -48,6 +48,7 @@ START	MOVLW b'00000001' ;0x01  RC0
 LOOP1	DECFSZ COUNTER, 1;substract 1 from 255
 	GOTO	LOOP1     ;if counter is zero then carry on
 	
+	CLRF PORTC  ;to turn OFF all LEDs that may be ON 
 	MOVLW b'00000100' ;load the W with 0x03 
 	MOVWF PORTC    ;Turn ON second LED on PORTC
 	;delay
@@ -57,6 +58,7 @@ LOOP1	DECFSZ COUNTER, 1;substract 1 from 255
 LOOP2	DECFSZ COUNTER, 1 ;substract 1 from 255
 	GOTO	LOOP2     ;if counter is zero then carry on
 	
+	CLRF PORTC  ; to turn OFF all LEDs that may be ON 
 	MOVLW b'00001000'  ; load the W with 0x04 
 	MOVWF PORTC    ;Turn ON third LED on PORTC
 	;delay
