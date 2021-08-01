@@ -1,0 +1,38 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Sun Aug 01 17:20:50 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000038
+                   .cinit    romdata   0x00001c    program   0x000004
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00001d      
+            30 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    LOOP1   0x00000d    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+                    LOOP2   0x000013    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+                    LOOP3   0x000019    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+                    START   0x000009    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    START   0x000009    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+                    LOOP1   0x00000d    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+                    LOOP2   0x000013    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+                    LOOP3   0x000019    program     static C:\Users\User\MPLABXProjects\Traffic_assembly.X\traffic_assembly.asm
+
+

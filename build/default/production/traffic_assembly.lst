@@ -1,0 +1,108 @@
+MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:20:49         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; Blinking LED in assembly
+                      00002     
+  00000003            00003 STATUS  equ 03h ; for selecting BANK
+  00000005            00004 RP0     equ 05h
+  00000006            00005 RP1     equ 06h
+  00000007            00006 PORTC   equ 07h ;BANK0
+  00000087            00007 TRISC   equ 87h ;BANK1
+                      00008  
+  00000020            00009 COUNTER     equ 20h ;the counter for our delay loop
+                      00010  
+                      00011  ;use directive to force the program to start at reset vector : 00h
+                      00012  
+                      00013  org 00h ; the program start from here
+                      00014  
+0000   0103           00015  clrw ;clear the W register
+                      00016  
+                      00017 ;selecting BANK0
+                      00018  
+0001   1283           00019  BCF STATUS, RP0; RP0 = 0
+0002   1303           00020  BCF STATUS, RP1; RP1 = 0
+                      00021  
+0003   0187           00022  CLRF PORTC ;initialise PORTC
+                      00023  
+                      00024 ; switch to bank1 for TRISC register 
+                      00025  
+0004   1683           00026  BSF STATUS, RP0 ;RPO=1
+                      00027  
+                      00028 ;Next make sure that all pins in PORTC are output
+                      00029  
+0005   3000           00030  MOVLW 0x00 ;clear w register
+                      00031  
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   0087           00032  MOVWF TRISC ;set PORTC as output
+                      00033  
+                      00034  ;back to bank0 for working with PORTC
+                      00035  
+0007   1283           00036  BCF STATUS, RP0; RP0 = 0
+0008   1303           00037  BCF STATUS, RP1; RP1 = 0
+                      00038  
+                      00039  ;Now let us turn on pins at PORTC
+                      00040  
+                      00041  
+0009   3001           00042 START   MOVLW b'00000001' ;0x01  RC0
+000A   0087           00043         MOVWF PORTC ; turn ON  first LED  PORTC
+                      00044         ;delay
+000B   30FF           00045         MOVLW  0xff ; or  b'11111111' decimal 255 
+000C   00A0           00046         MOVWF COUNTER    ;set counter to 0xff or load the counter with 255
+                      00047         
+000D   0BA0           00048 LOOP1   DECFSZ COUNTER, 1;substract 1 from 255
+000E   2???           00049         GOTO    LOOP1     ;if counter is zero then carry on
+                      00050         
+000F   3004           00051         MOVLW b'00000100' ;load the W with 0x03 
+0010   0087           00052         MOVWF PORTC    ;Turn ON second LED on PORTC
+MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:20:49         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00053         ;delay
+0011   30FF           00054         MOVLW  0xff ;  or b'11111111'
+0012   00A0           00055         MOVWF COUNTER    ;set counter to 0xff   
+                      00056 
+0013   0BA0           00057 LOOP2   DECFSZ COUNTER, 1 ;substract 1 from 255
+0014   2???           00058         GOTO    LOOP2     ;if counter is zero then carry on
+                      00059         
+0015   3008           00060         MOVLW b'00001000'  ; load the W with 0x04 
+0016   0087           00061         MOVWF PORTC    ;Turn ON third LED on PORTC
+                      00062         ;delay
+0017   30FF           00063         MOVLW    0xff ; or b'11111111' 
+0018   00A0           00064         MOVWF COUNTER    ;set counter to 0xff   
+                      00065         
+                      00066 
+0019   0BA0           00067 LOOP3   DECFSZ COUNTER, 1 ;substract 1 from 255
+001A   2???           00068         GOTO    LOOP3     ;if counter is zero then carry on
+                      00069         
+001B   2???           00070         GOTO START
+                      00071         
+                      00072         END
+MPASM 5.82              TRAFFIC_ASSEMBLY.ASM   8-1-2021  17:20:49         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+COUNTER                           00000020
+LOOP1                             0000000D
+LOOP2                             00000013
+LOOP3                             00000019
+PORTC                             00000007
+RP0                               00000005
+RP1                               00000006
+START                             00000009
+STATUS                            00000003
+TRISC                             00000087
+__16F877A                         00000001
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     1 reported,     0 suppressed
+
+
